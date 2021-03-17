@@ -8,7 +8,7 @@
 
 Atsakymas:
 
-![histograma](img/pavyzdys1.png)
+![histograma](img/1uzd.png)
 
 Išvados:
 
@@ -16,7 +16,7 @@ Išvados:
 
 Atsakymas:
 
-![atlyginimai](img/pavyzdys2.png)
+![atlyginimai](img/2uzd.png)
 
 Išvados:
 
@@ -25,7 +25,7 @@ Išvados:
 
 Atsakymas:
 
-![apdraustieji](img/pavyzdys3.png)
+![apdraustieji](img/3uzd.png)
 
 Išvados:
 
