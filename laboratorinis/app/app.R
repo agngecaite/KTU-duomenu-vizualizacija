@@ -16,23 +16,23 @@ dashboardBody(tabsetPanel(
 server <- function(input, output, session){
   data <- read_csv("../data/lab_sodra.csv")
   data1 <- data %>%
-    filter(ecoActCode==702200)
+    filter(ecoActCode == 702200)
   updateSelectizeInput(session, "imones_kodas", 
-                       choices=data1$name, 
-                       server=TRUE)
+                       choices = data1$name, 
+                       server = TRUE)
   output$table <- renderTable(
     data1 %>%
-      filter(name==input$imones_kodas), digits=0
+      filter(name == input$imones_kodas), digits = 0
   )
   
   output$plot <- renderPlot(
-    data1%>%
-      filter(name==input$imones_kodas) %>%
-      ggplot(aes(x=month, y=avgWage)) +
+    data1 %>%
+      filter(name == input$imones_kodas) %>%
+      ggplot(aes(x = month, y = avgWage)) +
       theme_minimal() +
       theme(axis.text.x = element_blank()) +
-      geom_point()+
-      geom_line(colour='red')
+      geom_point() +
+      geom_line(colour = 'red')
   )
 }
 shinyApp(ui, server)
