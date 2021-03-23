@@ -18,17 +18,20 @@ data1 %>%
 #2 uzd
 #isskiria menesi is datos
 data1 <- data1 %>% mutate(month_value=as.integer(substr(month, 5 ,7)))
-#apskaiciuoja vidutini imones metu atlyginima
-data2 <- data1 %>%
-  group_by(name) %>%
-  summarise(avg = mean(avgWage)) %>%
-  arrange(desc(avg))
-#apjungia abu duomenu failus
-data3 <- merge(data1, data2)
+
+#atrenka top 5 imones pagal vidutini atlygiima
+top5 <- data1 %>% 
+  group_by(name) %>% 
+  slice_max(avgWage, n=1) %>% 
+  ungroup() %>%
+  top_n(avgWage, n=5) %>% 
+  select(name)
+
+#atrenka top5 imoniu duomenis
+data2 <- data1 %>% filter(name %in% top5$name)
+
 #grafikas
-data3 %>%
-  arrange(desc(avg)) %>%
-  head(60) %>%
+data2 %>%
   ggplot(aes(x = month_value, y = avgWage, group = name)) +
   theme_minimal() +
   geom_point(aes(colour = name)) +
@@ -38,9 +41,7 @@ data3 %>%
 
 #3 uzd
 #grafikas
-data3 %>%
-  arrange(desc(avg)) %>%
-  head(60) %>%
+data2 %>%
   group_by(name) %>%
   slice_max(numInsured, with_ties = FALSE) %>%
   head(5) %>%
